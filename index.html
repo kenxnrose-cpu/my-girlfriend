@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be My Girlfriend?</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #4b0000, #7a0c0c);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .card {
+      background: #5a0a0a;
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      max-width: 400px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      color: #ffd6d6;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #ffecec;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    button {
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #b11226;
+      color: white;
+    }
+
+    #yesBtn:hover {
+      background: #d4142f;
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      background: #2b0000;
+      color: #ffd6d6;
+      position: relative;
+    }
+
+    #message {
+      margin-top: 25px;
+      font-size: 1.4rem;
+      color: #ffb3b3;
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff4d6d;
+      font-size: 20px;
+      animation: float 4s linear infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Hey ❤️</h1>
+    <p>
+      I’ve been wanting to ask you something special…<br><br>
+      Will you be my girlfriend?
+    </p>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 🙈</button>
+    </div>
+
+    <div id="message">
+      YAY! You just made me the happiest person ever 🥰
+    </div>
+  </div>
+
+  <!-- Background Music (Hidden YouTube Player) -->
+  <iframe
+    id="music"
+    width="0"
+    height="0"
+    src="https://www.youtube.com/embed/ZhIsAZO5gl0?enablejsapi=1&autoplay=0&loop=1&playlist=ZhIsAZO5gl0"
+    frameborder="0"
+    allow="autoplay">
+  </iframe>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const message = document.getElementById("message");
+    const music = document.getElementById("music");
+
+    let musicStarted = false;
+
+    function startMusic() {
+      if (!musicStarted) {
+        music.src += "&autoplay=1";
+        musicStarted = true;
+      }
+    }
+
+    yesBtn.addEventListener("click", () => {
+      startMusic();
+      message.style.display = "block";
+      createHearts();
+    });
+
+    noBtn.addEventListener("mouseover", () => {
+      startMusic();
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    function createHearts() {
+      for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+      }
+    }
+  </script>
+
+</body>
+</html>
